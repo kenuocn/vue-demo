@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue示例</title>
+</head>
+<body>
+<div id="app">
+    <span v-pre="">
+        {{name}}
+    </span>
+    <p v-if="show">你是傻逼吗?</p>
+    <span v-html="html"></span>
+    <br/>
+    <input type="text" v-model="url">
+    <a v-bind:href="url">捧腹笑</a>
+</div>
+<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+<script>
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            name: '张高元',
+            show: true,
+            html: '<a href="http://www.baidu.com">百度一下,你就知道</a>',
+            url: 'http://www.pengfuxiao.cn',
+        }
+    })
+</script>
+</body>
+</html>

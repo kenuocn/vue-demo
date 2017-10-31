@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue示例</title>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="book in books">{{book.name}}</li>
+    </ul>
+</div>
+<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            books: [
+                {name: ' <<vue实战>> '},
+                {name: ' <<JavaScript高级实践>> '},
+                {name: ' <<拍黄片从入门到放弃>> '}
+            ]
+        }
+    })
+</script>
+</body>
+</html>
