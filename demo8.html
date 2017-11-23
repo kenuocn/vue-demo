@@ -6,6 +6,12 @@
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="./js/vue.js"></script>
+    <style>
+        .completed{
+            color: chartreuse;
+            text-decoration: line-through;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-static top">Vue js 2.0</nav>
@@ -15,10 +21,16 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Welcome Vue js 2.0</div>
                 <div class="panel-body">
-                    <h1>My todos</h1>
+                    <h1>My todos {{todoCount}}</h1>
                     <ul class="list-group">
                         <li class="list-group-item"
+                            v-bind:class="{'completed' : todo.completed}"
                             v-for="(todo,index) in todos">{{todo.title}}
+                            <button class="btn btn-xs pull-right"
+                                    v-bind:class="[todo.completed ? 'btn-danger' : 'btn-success']"
+                                    v-on:click="toggleCompletion(todo)">
+                                {{ todo.completed ? 'undo' : 'completed'}}
+                            </button>
                             <button class="btn btn-warning btn-xs pull-right" v-on:click="deleteTodo(index)">
                                 删除
                             </button>
@@ -48,22 +60,27 @@
         data:{
             message:'hello Vue js word!',
             todos:[
-                {id:1,title:'vue js 学习!'},
+                {id:1,title:'vue js 学习!',completed:false},
             ],
-            newTodo:{id:null,title:''},
+            newTodo:{id:null,title:'',completed:true},
+        },
+        computed:{
+            todoCount:function(){
+                return this.todos.length;
+            }
         },
         methods:{
             addTodo:function (newTodo) {
-                console.log(newTodo);
                 this.todos.push(newTodo);
-                this.newTodo = {id:null,title:''};
+                this.newTodo = {id:null,title:'',completed:true};
             },
             deleteTodo:function (index) {
                 this.todos.splice(index,1)
-            }
+            },
+            toggleCompletion(todo){
+                todo.completed =! todo.completed;
+            },
         },
     });
-
-    console.log(this.title)
 </script>
 </html>
